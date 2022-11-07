@@ -4,39 +4,41 @@
   <head>
     <meta charset="utf-8" />
     <title>Sticky notes</title>
-    <!-- <link
+    <link
       href="https://fonts.googleapis.com/css?family=Reenie+Beanie&display=swap"
       rel="stylesheet"
-    /> -->
+    />
     <link rel="stylesheet" href="style.css" />
-    <!-- <link rel="manifest" href="manifest.json" /> -->
+    <link rel="manifest" href="manifest1.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
   <body>
-    <div id="header">
-      <h1>Sticky Notes</h1>
-      <p id="ts">It's As Simple As That </p>
+    <div id="heading">
+      <h1>Stick-It Notes</h1>
+      <p id="ts">It's As Simple As That</p>
     </div>
     <div id="form">
-      <form id="notesForm">
+      <form id="inputForm">
         <input
           type="text"
-          class="notesText"
+          class="inputText"
           placeholder="Title"
-          id="new-note-title"
+          id="new-note-title-input"
           autocomplete="off"
           required
           autofocus
         />
         <input
-          class="notesText"
+          class="inputText"
           type="text"
-          placeholder="Notes"
-          id="new-note-body"
+          placeholder="Note Content"
+          id="new-note-body-input"
           autocomplete="off"
           required
         />
+        <br />
+        <br />
         <button type="submit" class="btn">
           Create Note
         </button>
@@ -45,6 +47,6 @@
 
     <h3 id="no-notes">No Notes Found, Add one!</h3>
     <ul id="notes"></ul>
-    <script src="myscript.js"></script>
+    <script src="myscripts.js"></script>
   </body>
 </html>

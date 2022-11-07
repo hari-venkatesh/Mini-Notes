@@ -1,0 +1,11 @@
+
+
+{
+    "name": "Stick-it Notes by Hari Venkatesh",
+    "short_name": "Stick-it",
+    "start_url": "main.html",
+    "scope": "./",
+    "theme_color": "#ffd31d",
+    "background_color": "#333",
+    "display": "standalone"
+  }

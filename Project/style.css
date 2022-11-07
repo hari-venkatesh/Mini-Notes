@@ -10,9 +10,10 @@ body {
   margin: 3em;
   background: #1a3a3a;
   color: #fff;
+  text-align: center;
 }
 
-#header {
+#heading {
   position: sticky;
   top: 0;
   background-color: #1a3a3a;
@@ -30,7 +31,7 @@ body {
   color: #69c7c7;
 }
 
-.notesText {
+.inputText {
   padding: 10px;
   border-radius: 5px;
   border: 2px solid #3b8f93;
@@ -46,9 +47,9 @@ body {
 .btn {
   padding: 10px;
   border-radius: 20px;
-  border: 1px solid #69c7c7;
+  border: 2px solid  #69c7c7;
   background-color: #3b8f93;
-  color: white;
+  color: #333;
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
@@ -84,7 +85,6 @@ ul li a {
   width: 10em;
   padding: 1em;
   box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
-  border-radius: 5px;
 }
 
 ul li {
@@ -109,8 +109,8 @@ ul li p {
   position: absolute;
   top: 0;
   right: 0;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   background-color: #d34c37;
   border: 1px solid white;
   border-radius: 5px;
@@ -130,7 +130,15 @@ ul li:nth-child(even) a {
   -moz-transform: rotate(4deg);
   position: relative;
   top: 5px;
-  background: #69c7c7;
+  background: #ff5733;
+}
+
+ul li:nth-child(3n) a {
+  transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+  background: #dfec4e;
 }
 
 ul li:nth-child(5n) a {
@@ -138,6 +146,7 @@ ul li:nth-child(5n) a {
   -moz-transform: rotate(5deg);
   position: relative;
   top: -10px;
+  background: #e14ea6;
 }
 
 ul li a:hover,
@@ -147,7 +156,6 @@ ul li a:focus {
   transform: scale(1.25);
   -moz-transform: scale(1.25);
   position: relative;
-  border-radius: 5px;
   z-index: 5;
 }
 
@@ -168,14 +176,14 @@ ol li a {
   body {
     margin-top: 1em;
   }
-  #new-note-title,
-  #new-note-body {
+  #new-note-title-input,
+  #new-note-body-input {
     display: block;
     width: 90%;
     margin-left: 0px;
   }
 
-  #header {
+  #heading {
     margin-left: 0px;
   }
 

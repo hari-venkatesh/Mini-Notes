@@ -1,8 +1,12 @@
 
-// if ("serviceWorker" in navigator) {
-//   // register service worker
-//   navigator.serviceWorker.register("service-worker.js");
-// }
+if ("serviceWorker" in navigator) {
+  // register service worker
+  navigator.serviceWorker.register("service-worker.js");
+}
+
+var itemList = document.getElementById("notes");
+
+itemList.addEventListener("click", removeItem);
 
 let count = Number(window.localStorage.getItem("count"));
 if (!count) {
@@ -11,17 +15,18 @@ if (!count) {
 
 console.log(count);
 
-function createNote(noteTitle, noteBody) {
+let createNote = (noteTitle, noteBody) => {
   if (count > 0) {
-    document.getElementById("no-notes").classList.add("hidden");
+    document.getElementById("no-notes").className = "hidden";
   }
 
-  let li = document.createElement("li");
-  let a = document.createElement("a");
-  let h2 = document.createElement("h2");
-  let p = document.createElement("p");
-  let xButton = document.createElement("button");
+  var li = document.createElement("li");
+  var a = document.createElement("a");
+  var h2 = document.createElement("h2");
+  var p = document.createElement("p");
+  var ul = document.getElementById("notes");
 
+  let xButton = document.createElement("button");
   xButton.classList.add("delete");
   let xText = document.createTextNode("X");
   let h2TN = document.createTextNode(noteTitle);
@@ -37,69 +42,68 @@ function createNote(noteTitle, noteBody) {
   a.setAttribute("href", "#");
 
   li.appendChild(a);
+  ul.appendChild(li);
+};
 
-  document.getElementById("notes").appendChild(li);
-}
-
-function createNoteFromInput(e) {
+let createNoteFromInput = (e) => {
   e.preventDefault();
-  let noteTitle = document.getElementById("new-note-title").value;
-  let noteBody = document.getElementById("new-note-body").value;
+  var noteTitle = document.getElementById("new-note-title-input").value;
+  var noteBody = document.getElementById("new-note-body-input").value;
 
-  console.log("Linked", noteBody, noteTitle);
+  document.getElementById("new-note-title-input").value = "";
+  document.getElementById("new-note-body-input").value = "";
 
-  document.getElementById("new-note-title").value = "";
-  document.getElementById("new-note-body").value = "";
-
+  console.log("yes");
   if (!noteTitle || !noteBody) {
     alert("Both Title and body of the note must be provided");
     return;
   }
-
   count += 1;
-  console.log("Adding count")
   window.localStorage.setItem("count", count);
+
+  while (window.localStorage.getItem(noteTitle)) {
+    noteTitle = noteTitle + " - 1";
+  }
   window.localStorage.setItem(noteTitle, noteBody);
+
   createNote(noteTitle, noteBody);
-}
+};
 
 function removeItem(e) {
+  //console.log('2');
   if (e.target.classList.contains("delete")) {
-    if (confirm('Are you sure to delete the "' + e.target.previousElementSibling.innerText + '" note?')) {
-      let li = e.target.parentElement.parentElement;
-      let ul = document.getElementById("notes");
-      
-      ul.removeChild(li);
+    console.log(e);
+    if (
+      confirm(
+        'Are you sure to delete the "' +
+          e.target.previousElementSibling.innerText +
+          '" note?'
+      )
+    ) {
+      //grab the parent
+      // console.log(e.target.previousSibling.data);
+      var li = e.target.parentElement.parentElement;
 
-      console.log("Removing count - 1", count);
+      itemList.removeChild(li);
       count -= 1;
-      console.log("Removing count - 2", count);
-    
       window.localStorage.setItem("count", count);
-      console.log(e.target.previousElementSibiling);
-      window.localStorage.removeItem(e.target.previousElementSibiling.innerText);
-    
+      window.localStorage.removeItem(e.target.previousElementSibling.innerText);
       if (count < 1) {
         document.getElementById("no-notes").className = "";
       }
     }
   }
-  // if (ul.childNodes.length === 0) {
-  //   document.getElementById("no-notes").classList.remove("hidden");
-  // }
 }
 
-for (let i = 0; i < count + 1; i++) {
+for (i = 0; i < count + 1; i++) {
+  console.log(window.localStorage.key(i));
   let noteTitle = window.localStorage.key(i);
   let noteBody = window.localStorage.getItem(noteTitle);
-
   if (noteTitle !== "count" && noteTitle) {
     createNote(noteTitle, noteBody);
   }
 }
 
 document
-  .getElementById("notesForm")
+  .getElementById("inputForm")
   .addEventListener("submit", createNoteFromInput, false);
-
-document.getElementById("notes").addEventListener("click", removeItem);
